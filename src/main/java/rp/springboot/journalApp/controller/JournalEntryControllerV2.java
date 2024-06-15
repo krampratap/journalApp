@@ -62,6 +62,7 @@ public class JournalEntryControllerV2 {
             }
     )
     @PostMapping("{username}")
+//    @Transactional
     public ResponseEntity<JournalEntity> createJournal(@RequestBody JournalEntity myEntity,@PathVariable String username) {
         try {
             User user = userService.findByUsername(username);
