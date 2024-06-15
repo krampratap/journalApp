@@ -1,0 +1,26 @@
+In Mongo Db we will have collections ( tables )
+In that we will have fields ( columns ) and documents ( rows )
+
+Commands
+0. Start Mongo service - brew services start mongodb-community
+                         mongosh
+1. show dbs
+2. use school -> creates school database if not exists
+3. show collections -> shows the tables
+4. db.students.insertOne({"name":"Ram","age":20})
+5. db.students.find() -> gets the content of the tables
+6. db.students.find({name:"Ram"}) -> filter with name
+7. db.students.deleteOne({name:"Ram"}) -> delete
+7. db.students.deleteMany({}) -> delete All entries
+8. Register in Application.properties.
+9. Extend MongoRepository on JpaRepository
+10. Add @Document annotation on Entity and @Id on id
+11. quit() - to come out of the mongodb
+12. Stop Mongo service - brew services stop mongodb-community
+13. Annotation
+    @Document
+    @Indexed
+    @DbRef
+
+
+What is @Content, @Schema in @ApiResponse
