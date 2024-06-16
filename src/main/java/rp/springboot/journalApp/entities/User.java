@@ -23,4 +23,5 @@ public class User {
     private String password;
     @DBRef //we are creating a reference to JournalEntity
     private List<JournalEntity> journalEntities;
+    private List<String> roles;
 }
