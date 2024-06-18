@@ -46,7 +46,7 @@ public class JournalEntryControllerV2 {
 
     @GetMapping("/id/{id}")
     public ResponseEntity<JournalEntity> getJournalById(@Parameter(description = "Id", example = "666d4e1fd1d318550193f265") @PathVariable ObjectId id) {
-        Optional<JournalEntity> journalEntity = journalEntityService.getOne(id);
+        Optional<JournalEntity> journalEntity = Optional.ofNullable(journalEntityService.getOne(id));
         if (journalEntity.isPresent()) {
             return new ResponseEntity<>(journalEntity.get(), HttpStatus.OK);
         }
@@ -77,7 +77,7 @@ public class JournalEntryControllerV2 {
 
     @DeleteMapping("/id/{id}")
     public ResponseEntity<?> deleteJournal(@Parameter(description = "Id", example = "666d4e1fd1d318550193f265") @PathVariable(name="id") ObjectId id) { //WildCard ? Can return anything as part of Response Entity
-        List<User> journalUsers = userService.findUsersBy(journalEntityService.getOne(id).orElse(null));
+        List<User> journalUsers = userService.findUsersBy(journalEntityService.getOne(id));
         journalUsers.forEach(user -> user.getJournalEntities().removeIf(x-> x.getId().equals(id)));
         //If we dont delete for each user... next time when user adds a journal.. spring will see existing id does not have a
         // reference and it will delete it. But we need to delete the reference also while deleting journal.
@@ -88,7 +88,7 @@ public class JournalEntryControllerV2 {
 
     @PutMapping("/id/{id}")
     public ResponseEntity<JournalEntity> updateEntity(@Parameter(description = "Id", example = "666d4e1fd1d318550193f265") @PathVariable ObjectId id, @RequestBody JournalEntity updatedEntity) {
-        var entity = journalEntityService.getOne(id).orElse(null);
+        var entity = journalEntityService.getOne(id);
         if (entity != null) {
             entity.setTitle(updatedEntity.getTitle() != null && !updatedEntity.getTitle().isEmpty() ? updatedEntity.getTitle() : entity.getTitle());
             entity.setContent(updatedEntity.getContent() != null && !updatedEntity.getContent().isEmpty() ? updatedEntity.getContent() : entity.getContent());

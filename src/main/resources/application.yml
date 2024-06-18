@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      auto-index-creation: 'true'
+      database: journaldb
+      port: '27017'
+      host: localhost
+  application:
+    name: Journal App
+  redis:
+    host: localhost
+    port: 6379
